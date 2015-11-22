@@ -1,0 +1,4 @@
+com/henrik/card/service/repository/CardDeckRepository.class
+com/henrik/card/service/domain/Deck.class
+com/henrik/card/service/domain/DeckFormat.class
+com/henrik/card/service/CardServiceApplication.class

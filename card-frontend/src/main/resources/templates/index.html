@@ -13,6 +13,12 @@
     <script src="http://cdn.jsdelivr.net/webjars/angularjs/1.3.8/angular.min.js"
             th:src="@{/webjars/angularjs/1.3.8/angular.min.js}"></script>
 
+    <script src="http://cdn.jsdelivr.net/webjars/angularjs/1.3.8/angular.min.js"
+            th:src="@{/webjars/angularjs/1.3.8/angular-resource.min.js}"></script>
+
+    <!-- Angular spring data rest fant jeg ikke en alternativ HREF til på CDN nettverket så den er utelatt. -->
+    <script th:src="@{/webjars/angular-spring-data-rest/0.4.3/dist/angular-spring-data-rest.min.js}"></script>
+
     <script src="js/card.js" />
     <script src="js/controllers.js" />
 
@@ -40,34 +46,17 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" ng-repeat="card in cards">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Deck 1</h3>
                             </div>
                             <div class="panel-body">
-                                Panel content
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Deck 2</h3>
-                            </div>
-                            <div class="panel-body">
-                                Panel content
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Deck 3</h3>
-                            </div>
-                            <div class="panel-body">
-                                Panel content
+                                <strong>Name: </strong>{{card.name}}<br/>
+                                <strong>Author: </strong>{{card.author}}<br/>
+                                <strong>Format: </strong>{{card.format}}<br/>
+                                <strong>Rating: </strong>{{card.rating}}<br/>
+                                <strong><a href="{{card._links.self.href}}">Details</a></strong>
                             </div>
                         </div>
                     </div>
@@ -78,6 +67,8 @@
             <div class="jumbotron">
                 <p>The ID is {{greeting.id}}</p>
                 <p>The content is {{greeting.content}}</p>
+                <p> Decks are {{cards}}</p>
+                <p>Test: {{test}}</p>
             </div>
 
         </div>

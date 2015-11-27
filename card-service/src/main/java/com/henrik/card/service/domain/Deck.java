@@ -23,8 +23,7 @@ public class Deck {
     private DeckFormat format;
 
     @Column(name="RATING")
-    @Enumerated(EnumType.STRING)
-    private Enum rating;
+    private int rating;
 
 
     public long getId() {
@@ -51,13 +50,9 @@ public class Deck {
         this.format = format;
     }
 
-    public Enum getRating() {
-        return rating;
-    }
+    public int getRating() { return rating;  }
 
-    public void setRating(Enum rating) {
-        this.rating = rating;
-    }
+    public void setRating(int rating) { this.rating = rating; }
 
     public String getName() {
         return name;

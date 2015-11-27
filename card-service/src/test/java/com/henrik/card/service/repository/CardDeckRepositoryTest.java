@@ -9,13 +9,18 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-
 /**
  * Card Deck REST Controller Repository Test. Sounds like an integration test but everything is mocked.
+ * These are unit tests, the server is mocked, and so are the responses. Typically we will assert that the functionality (technical) is invoked correctly,
+ * ie that the correct number of calls are made.
  */
 public class CardDeckRepositoryTest {
 
@@ -31,35 +36,44 @@ public class CardDeckRepositoryTest {
     @Test
     public void testGenericGetRequest() {
 
-        String responseBody = "{\"links\" : {\"search\": {\"href\": \"http://localhost:8083/decks/search\"}}}";
+        JsonObject json = Json.createObjectBuilder()
+                .add("_links", Json.createObjectBuilder()
+                        .add("findByAuthor", Json.createObjectBuilder()
+                                .add("href", "http://localhost:8083/decks/search/findByAuthor{?author}")
+                                .add("templated", true))
+                        .add("findByName", Json.createObjectBuilder()
+                                .add("href", "http://localhost:8083/decks/search/findByName{?name}")
+                                .add("templated", true))
+                        .add("self", Json.createObjectBuilder()
+                                .add("href", "http://localhost:8083/search")))
+                .build();
 
         this.mockServer.expect(requestTo("/"))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(json.toString(), MediaType.APPLICATION_JSON));
 
         restTemplate.getForObject("/", Object.class);
-
+        System.out.println(json.toString());
         this.mockServer.verify();
     }
 
     @Test
     public void testGetRequest() {
+        JsonObject json = Json.createObjectBuilder()
+                .add("name", "Black White Aggro")
+                .add("author", "Henrik Hahne")
+                .add("format", "LEGACY")
+                .add("rating", 1)
+                .add("_links", Json.createObjectBuilder()
+                        .add("self", Json.createObjectBuilder()
+                                .add("href", "http://localhost:8083/search"))
+                        .add("deck", Json.createObjectBuilder()
+                            .add("href", "http://localhost:8083/decks/1")))
+                .build();
 
-        String responseBody = "{\n" +
-                "  \"name\": \"Black White Aggro\",\n" +
-                "  \"author\": \"Henrik Hahne\",\n" +
-                "  \"format\": \"LEGACY\",\n" +
-                "  \"rating\": null,\n" +
-                "  \"_links\": {\n" +
-                "    \"self\": {\n" +
-                "      \"href\": \"http://localhost:8083/decks/2\"\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
-
-        this.mockServer.expect(requestTo("/decks/1"))
+                this.mockServer.expect(requestTo("/decks/1"))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(json.toString(), MediaType.APPLICATION_JSON));
 
         restTemplate.getForObject("/decks/{id}", Deck.class, 1);
 

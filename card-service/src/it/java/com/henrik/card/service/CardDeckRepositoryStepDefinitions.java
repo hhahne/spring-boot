@@ -61,10 +61,10 @@ public class CardDeckRepositoryStepDefinitions {
 //    }
 
 
-    @Given("^(\\d+) stored deck in the repository with author Henrik Hahne$")
-    public void stored_deck_in_the_repository_with_author_Henrik_Hahne(int arg1) throws Throwable {
+    @Given("^(\\d+) stored deck in the repository with author (.*)$")
+    public void stored_deck_in_the_repository_with_author(int arg1, String author) throws Throwable {
         Deck aDeck = new Deck();
-        aDeck.setAuthor("Henrik Hahne");
+        aDeck.setAuthor(author);
         aDeck.setFormat(DeckFormat.LEGACY);
         aDeck.setName("Black Aggro");
 

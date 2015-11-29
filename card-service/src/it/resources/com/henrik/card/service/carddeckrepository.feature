@@ -1,3 +1,5 @@
+#The annotation makes sure that everything is rolled back between runs, resulting in a clean database.
+@txn
 Feature: Using the card Service repository
 
   Scenario: Finding decks by author

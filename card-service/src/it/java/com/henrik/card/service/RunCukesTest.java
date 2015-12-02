@@ -10,6 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(format={"pretty", "html:target/cucumber"}, glue = {"cucumber.api.spring", "classpath:com.henrik.card.service"})
+@CucumberOptions(plugin={"pretty", "html:target/cucumber"}, glue = {"cucumber.api.spring", "classpath:com.henrik.card.service"})
 public class RunCukesTest {
 }

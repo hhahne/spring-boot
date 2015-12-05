@@ -1,41 +1,33 @@
 package com.henrik.card.service;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
 import com.google.common.collect.Iterables;
-import com.henrik.card.service.CardServiceApplication;
 import com.henrik.card.service.domain.Deck;
 import com.henrik.card.service.domain.DeckFormat;
 import com.henrik.card.service.repository.CardDeckRepository;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationContextLoader;
-import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Collection;
 import java.util.List;
+
+import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 @ContextConfiguration(classes = {CardServiceApplication.class}, loader = SpringApplicationContextLoader.class)
 @WebAppConfiguration
 @IntegrationTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CardDeckRepositoryStepDefinitions {
-
-    @Autowired
-    private WebApplicationContext context;
 
     @Autowired
     private CardDeckRepository repository;
@@ -59,12 +51,12 @@ public class CardDeckRepositoryStepDefinitions {
 
     @When("^search repository on author (.*)$")
     public void search_repository_on_author(String author) throws Throwable {
-        List<Deck> foundDecks = repository.findByAuthor(author);
+        repository.findByAuthor(author);
     }
 
     @When("^search repository for all decks$")
     public void search_repository_for_all_decks() throws Throwable {
-        Iterable<Deck> decks = repository.findAll();
+        repository.findAll();
     }
 
     @Then("^The deck with (.*) as author shall be found$")

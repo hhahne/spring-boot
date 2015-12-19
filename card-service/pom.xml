@@ -34,6 +34,8 @@
 		<sonar.jacoco.itReportPath>${project.build.directory}/coverage-reports/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
 		<sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
 		<sonar.jacoco.overallReportPath>${project.build.directory}/coverage-reports</sonar.jacoco.overallReportPath>
+
+		<docker.image.prefix>hhahne</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -280,6 +282,22 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.2.3</version>
+				<configuration>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

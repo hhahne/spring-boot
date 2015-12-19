@@ -1,0 +1,16 @@
+Docker:
+
+build the docker container:
+mvn package
+mvn docker:build
+
+To run it:
+#Set up a VM that runs docker (so you can get access to docker commands
+eval "$(docker-machine env default)"
+docker run -d -P -p 8085:8083 --name rest hhahne/card-service
+
+The -P options exposes the ports inside the docker container to the outside world (so you can access them on OS X)
+The -p option sets the port to 8085 on the OS X box, mapped to port 8083 on the local VM (where this application was run)
+It seems like the -p option is necessary to make sure you can access the container from outside the VM (for spring boot apps at least)
+The default port you get if not specified gives connection refused.
+

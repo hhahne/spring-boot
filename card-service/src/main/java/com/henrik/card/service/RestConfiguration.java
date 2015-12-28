@@ -6,7 +6,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-
 /**
  * This class is only needed to enable CORS (Cross Origin Resource Sharing).
  * Spring Data Rest uses the HATEOAS style for the rest services and this is not supported by Angular out of the box.

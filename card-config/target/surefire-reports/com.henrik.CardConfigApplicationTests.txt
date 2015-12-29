@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.henrik.CardConfigApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.089 sec - in com.henrik.CardConfigApplicationTests

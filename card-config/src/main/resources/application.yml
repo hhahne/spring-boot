@@ -7,3 +7,5 @@ spring:
       server:
         git :
           uri: https://github.com/hhahne/microservice-configuration.git
+
+

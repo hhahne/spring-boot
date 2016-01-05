@@ -1,0 +1,12 @@
+card-config:
+  image: hhahne/card-config
+  ports:
+      - "8888:8888"
+card-service:
+  image: hhahne/card-service
+  ports:
+      - "8083:8083"
+card-frontend:
+  image: hhahne/card-frontend
+  ports:
+      - "8082:8082"

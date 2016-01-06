@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.0.RELEASE</version>
+		<version>1.3.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -25,6 +25,38 @@
 		<docker.image.prefix>hhahne</docker.image.prefix>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!--
+                    Import dependency management from Spring Boot.
+                    If you don't do this, then the versions of the spring framework from spring-cloud will be used, and they are old.
+                    Spring-boot needs spring version 4.2 and spring-cloud currently uses 4.1.6. This older version causes problems with CORS and other things, failing tests.
+                    Resolved by forcing the loading of spring-boot dependencies for now. When spring-cloud uses a newer version (4.2+) of spring this should be possible to remove.
+                -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>1.3.1.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-netflix</artifactId>
+				<version>1.0.4.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!--<dependency>-->
+				<!--<groupId>org.springframework.cloud</groupId>-->
+				<!--<artifactId>spring-cloud-starter-parent</artifactId>-->
+				<!--<version>1.0.1.RELEASE</version>-->
+				<!--<type>pom</type>-->
+				<!--<scope>import</scope>-->
+			<!--</dependency>-->
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -34,6 +66,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zuul</artifactId>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-cloud-starter-eureka</artifactId>-->
+		<!--</dependency>-->
 		<!-- WebJars -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -55,7 +95,6 @@
 			<artifactId>angular-spring-data-rest</artifactId>
 			<version>0.4.3</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

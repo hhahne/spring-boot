@@ -1,0 +1,8 @@
+server:
+  port: 8082
+
+# TODO: Move this to the git configuration repository, enbaling it to be different in different environments :)
+zuul:
+  routes:
+      decks:
+        url: http://192.168.99.100:8083/decks

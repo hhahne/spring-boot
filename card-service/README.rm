@@ -14,4 +14,4 @@ The -p option sets the port to 8085 on the OS X box, mapped to port 8083 on the 
 It seems like the -p option is necessary to make sure you can access the container from outside the VM (for spring boot apps at least)
 The default port you get if not specified gives connection refused.
 
-Dette er en test !
+

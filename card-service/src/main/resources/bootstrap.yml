@@ -9,4 +9,6 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      #defaultZone: http://discovery:8761/eureka
+      #This one is needed when card-config is run inside docker, since DNS names are hard to translate between containers.
+      defaultZone: http://discovery:8761/eureka/

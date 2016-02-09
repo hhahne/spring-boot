@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: card-frontend
+
+  config:
+    client:
+      uri: http://localhost:8888
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      #defaultZone: http://discovery:8761/eureka
+      #This one is needed when card-config is run inside docker, since DNS names are hard to translate between containers.
+      defaultZone: http://discovery:8761/eureka/

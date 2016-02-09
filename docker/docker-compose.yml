@@ -1,14 +1,25 @@
+card-discovery:
+   image: hhahne/card-discovery
+   ports:
+      - "8761:8761"
 card-config:
   image: hhahne/card-config
   ports:
       - "8888:8888"
+  links:
+      - card-discovery:discovery
 card-service:
   image: hhahne/card-service
   ports:
       - "8083:8083"
+  links:
+      - card-discovery:discovery
+      - card-config
 card-frontend:
   image: hhahne/card-frontend
   ports:
       - "8082:8082"
   links:
+      - card-discovery:discovery
+      - card-config
       - card-service

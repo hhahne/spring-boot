@@ -7,8 +7,11 @@ spring:
       uri: http://localhost:8888
 
 eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
   client:
     serviceUrl:
-      #defaultZone: http://discovery:8761/eureka
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
       #This one is needed when card-config is run inside docker, since DNS names are hard to translate between containers.
-      defaultZone: http://discovery:8761/eureka/
+      #defaultZone: http://discovery:8761/eureka/

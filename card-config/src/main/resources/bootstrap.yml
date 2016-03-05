@@ -7,11 +7,12 @@ spring:
 #Note! Check out the eureka.instance.preferIpAddress=true to advertize IPs instead of hostnames (to amke it work in docker)
 eureka:
   instance:
+    hostname: localhost
     preferIpAddress: true
   client:
     serviceUrl:
       #The first two can be used to run against eureka when card-config is run with java -jar
       #defaultZone: http://discovery:8761/eureka/
-      #defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
       #This one is needed when card-config is run inside docker, since DNS names are hard to translate between containers.
-      defaultZone: http://discovery:8761/eureka/
+      #defaultZone: http://discovery:8761/eureka/

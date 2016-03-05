@@ -1,3 +1,6 @@
 server:
   port: 8083
 
+ribbon:
+  eureka:
+    enabled: true

@@ -6,9 +6,9 @@ spring:
       name: card-frontend
 
 # TODO: Move this to the git configuration repository, enbaling it to be different in different environments :)
-zuul:
-  routes:
-      decks:
+#zuul:
+#  routes:
+#      decks:
         #This will not work since card-frontend and card-service are running in 2 different containers.
         #Possible solution: set up via IP address instead, or make a "fake" name that will be linked via docker-compose as an alias.
-        url: http://localhost:8083/decks
+#        url: http://localhost:8083/decks

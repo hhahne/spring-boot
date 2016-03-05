@@ -1,12 +1,14 @@
 package com.henrik.card.ui.controllers.rest;
 
+import com.henrik.card.ui.controllers.ui.client.DeckServiceClient;
+import com.henrik.card.ui.controllers.ui.model.Deck;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by henrikhahne on 25/09/15.
@@ -15,14 +17,16 @@ import java.util.UUID;
 @RestController
 public class CardRestController {
 
-    @RequestMapping("/resource")
-    public Map<String, Object> index() {
+    @Autowired
+    private DeckServiceClient deckServiceClient;
 
-        Map<String,Object> model = new HashMap<String,Object>();
-        model.put("id", UUID.randomUUID().toString());
-        model.put("content", "Hello Norge" +
-                "");
-        return model;
+    @RequestMapping("/feigndecks")
+    public List<Deck> index() {
+
+        Collection<Deck> decks = deckServiceClient.findAll().getContent();
+        List<Deck> returnedDecks = new ArrayList();
+        returnedDecks.addAll(decks);
+        return returnedDecks;
     }
 
 }

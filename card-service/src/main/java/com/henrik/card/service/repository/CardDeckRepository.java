@@ -8,7 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@EnableHystrix
 @RepositoryRestResource(collectionResourceRel = "decks", path = "decks")
 public interface CardDeckRepository extends CrudRepository<Deck, Long> {
 

@@ -12,7 +12,7 @@ import org.springframework.web.filter.CorsFilter;
  * Therefore some magic is required to make that work in the controller. In addition, this is needed to make sure the data gets back to the caller. Wothout this class
  * it would be stopped and the result would be an HTML error in loading the page and showing empty results.
  */
-@Configuration
+//@Configuration
 public class RestConfiguration {
 
     @Bean

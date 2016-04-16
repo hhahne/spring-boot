@@ -12,11 +12,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-//@SpringBootApplication
-@Configuration
-@ComponentScan("com.henrik.card-service")
-@EnableAutoConfiguration
+@SpringBootApplication
 @EnableDiscoveryClient
+@EnableHystrix
 public class CardServiceApplication {
 
     @Value("${hello:DEFAULTHELLO}")
